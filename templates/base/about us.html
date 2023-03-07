@@ -1,0 +1,29 @@
+{% extends 'base/main.html' %}
+{% block content %}
+{% load static %}
+    <title>About Us</title>
+    <div class="header-bar">
+    <h1>About this app</h1>
+    </div>
+
+    <div class="card-body">
+        <div class="container-1">
+            <p>Are you tired of the old but gold notebook for your notes and to do list?</p><br>
+             <img src="{% static 'img/to do 2.jpg' %}" alt="">
+        </div>
+        <div class="container-2">
+            <p>We got you covered with a step by step, easy to follow ,create, read, update and delete functionality in the To-Do List application</p>
+            <br>
+            <p>Don't have an account? <i><a href="{% url 'register' %}">Register</a></i></p><br>
+            <p>Already have an account?<a href="{% url 'login' %}">Login</a></p>
+        </div>
+
+        <div class="container-2">
+
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}
