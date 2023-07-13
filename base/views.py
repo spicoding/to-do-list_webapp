@@ -14,6 +14,8 @@ from .models import Task
 
 
 # Create your views here.
+
+#Logic for The Login View
 class CustomLogInView(LoginView):
     template_name = 'base/login.html'
     fields = '__all__'
@@ -22,7 +24,7 @@ class CustomLogInView(LoginView):
     def get_success_url(self):
         return reverse_lazy('tasks')
 
-
+#Logic for Registration Of User
 class Registerpage(FormView):
     template_name = 'base/register.html'
     form_class = UserCreationForm
@@ -41,6 +43,7 @@ class Registerpage(FormView):
         return super(Registerpage, self).get(*args, **kwargs)
 
 
+#Logic for Tasklist creation and display (Filtering the Tasklist per user)
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
@@ -59,13 +62,13 @@ class TaskList(LoginRequiredMixin, ListView):
 
         return context
 
-
+#Logic for The Task Detail (Filtering the detail per user)
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'task'
     template_name = 'base/task.html'
 
-
+#Logic for The Task Creation
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description', 'complete']
@@ -75,13 +78,14 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
 
-
+#Logic for The Task Update
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['title', 'description', 'complete']
     success_url = reverse_lazy('tasks')
 
 
+#Logic for The Task Deletion
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     fields = '__all__'
